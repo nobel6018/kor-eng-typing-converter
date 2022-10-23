@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es5",
+      "es6",
+      "dom",
+      "dom.iterable"
+    ],
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./build",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true
+  }
+}
