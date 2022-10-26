@@ -1,3 +1,4 @@
 import korToEng from './src/korToEng';
+import engToKor from './src/engToKor';
 
-export default korToEng;
+export { korToEng, engToKor };
