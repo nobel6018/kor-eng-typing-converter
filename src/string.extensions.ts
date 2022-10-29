@@ -15,46 +15,28 @@ String.prototype.substituteVowels = function (this: string) {
 };
 
 String.prototype.substituteFirstConsonants = function (this: string) {
-  return this.replaceAll(/[REQTW]/g, (s) => firstConsonantDict[s]).replaceAll(/([a-zA-Z])([ㅏ-ㅣ])/gi, (s, g1, g2) => {
-    if (g1) {
-      return firstConsonantDict[g1.toLowerCase()] + g2;
-    } else {
-      return s;
-    }
+  return this.replaceAll(/([REQTW])([ㅏ-ㅣ])/g, (s, g1, g2) => {
+    return firstConsonantDict[g1] + g2;
+  }).replaceAll(/([a-zA-Z])([ㅏ-ㅣ])/gi, (s, g1, g2) => {
+    return firstConsonantDict[g1.toLowerCase()] + g2;
   });
 };
 
 String.prototype.substituteLastConsonants = function (this: string) {
   return this.replaceAll(/([ㅏ-ㅣ])([RT])([^ㅏ-ㅣ]|$)/g, (s, g1, g2, g3) => {
-    if (g2) {
-      return g1 + lastConsonantDict[g2] + g3;
-    } else {
-      return s;
-    }
+    return g1 + lastConsonantDict[g2] + g3;
   })
     .replaceAll(/([ㅏ-ㅣ])(rt|sw|sg|fr|fa|fq|ft|fx|fv|fg|qt)([^ㅏ-ㅣ]|$)/gi, (s, g1, g2, g3) => {
-      if (g2) {
-        return g1 + lastConsonantDict[g2.toLowerCase()] + g3;
-      } else {
-        return s;
-      }
+      return g1 + lastConsonantDict[g2.toLowerCase()] + g3;
     })
     .replaceAll(/([ㅏ-ㅣ])([a-zA-Z])([^ㅏ-ㅣ]|$)/gi, (s, g1, g2, g3) => {
-      if (g2) {
-        return g1 + lastConsonantDict[g2.toLowerCase()] + g3;
-      } else {
-        return s;
-      }
+      return g1 + lastConsonantDict[g2.toLowerCase()] + g3;
     });
 };
 
 String.prototype.substituteTheLeftConsonants = function (this: string) {
-  return this.replaceAll(/[REQTW]/g, (s) => firstConsonantDict[s]).replaceAll(/([a-zA-Z])/gi, (s, g1) => {
-    if (g1) {
-      return firstConsonantDict[g1.toLowerCase()];
-    } else {
-      return s;
-    }
+  return this.replaceAll(/[REQTW]/g, (s) => compatibleConsonantDict[s]).replaceAll(/([a-zA-Z])/gi, (s, g1) => {
+    return firstConsonantDict[g1.toLowerCase()];
   });
 };
 
@@ -71,4 +53,9 @@ const firstConsonantDict = {
 // prettier-ignore
 const lastConsonantDict = {
   R: 'ᆩ', T: 'ᆻ', rt: 'ᆪ', sw: 'ᆬ', sg: 'ᆭ', fr: 'ᆰ', fa: 'ᆱ', fq: 'ᆲ', ft: 'ᆳ', fx: 'ᆴ', fv: 'ᆵ', fg: 'ᆶ', qt: 'ᆹ', r: 'ᆨ', s: 'ᆫ', e: 'ᆮ', f: 'ᆯ', a: 'ᆷ', q: 'ᆸ', t: 'ᆺ', d: 'ᆼ', w: 'ᆽ', c: 'ᆾ', z: 'ᆿ', x: 'ᇀ', v: 'ᇁ', g: 'ᇂ'
+};
+
+// prettier-ignore
+const compatibleConsonantDict = {
+  r: 'ㄱ',  R: 'ㄲ',  rt: 'ㄳ',  s: 'ㄴ',  sw: 'ㄵ',  sg: 'ㄶ',  e: 'ㄷ',  E: 'ㄸ',  f: 'ㄹ',  fr: 'ㄺ',  fa: 'ㄻ',  fq: 'ㄼ',  ft: 'ㄽ',  fx: 'ㄾ',  fv: 'ㄿ',  fg: 'ㅀ',  a: 'ㅁ',  q: 'ㅂ',  Q: 'ㅃ',  qt: 'ㅄ',  t: 'ㅅ',  T: 'ㅆ',  d: 'ㅇ',  w: 'ㅈ',  W: 'ㅉ',  c: 'ㅊ',  z: 'ㅋ',  x: 'ㅌ',  v: 'ㅍ',  g: 'ㅎ'
 };
