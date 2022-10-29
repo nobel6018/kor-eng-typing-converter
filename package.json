@@ -1,6 +1,6 @@
 {
   "name": "typing-rosetta",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "author": "Lee YoungHoon <nobel6018@gmail.com>",
