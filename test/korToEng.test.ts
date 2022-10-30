@@ -9,6 +9,10 @@ describe('Kor typing to english test', () => {
     expect(korToEng('ㄲㄴㄸㄹㅁㅃㅆㅇㅉㅊㅋㅌㅍㅎ')).toBe('RsEfaQTdWczxvg');
   });
 
+  test('ㅘㅙㅚㅝㅞㅟㅢㅏㅐㅑㅒㅓㅔㅕㅖㅗㅛㅜㅠㅡㅣ -> hkhohlnjnpnlmlkoiOjpuPhynbml', () => {
+    expect(korToEng('ㅘㅙㅚㅝㅞㅟㅢㅏㅐㅑㅒㅓㅔㅕㅖㅗㅛㅜㅠㅡㅣ')).toBe('hkhohlnjnpnlmlkoiOjpuPhynbml');
+  });
+
   test('1234567890-=!@#$%^&*()_+ -> 1234567890-=!@#$%^&*()_+', () => {
     expect(korToEng('1234567890-=!@#$%^&*()_+')).toBe('1234567890-=!@#$%^&*()_+');
   });

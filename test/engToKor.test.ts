@@ -1,19 +1,21 @@
 import { engToKor } from '../src';
 
 describe('Kor typing to english test', () => {
-  test('dpdjvkt -> 에어팟', () => {
+  test('combination(dpdjvkt) -> 에어팟', () => {
     expect(engToKor('dpdjvkt')).toBe('에어팟');
-  });
-
-  test('DpDJVKt -> 에어팟', () => {
+    expect(engToKor('dpdjvKt')).toBe('에어팟');
+    expect(engToKor('dpdjVKt')).toBe('에어팟');
+    expect(engToKor('dpdJVKt')).toBe('에어팟');
+    expect(engToKor('dpDJVKt')).toBe('에어팟');
     expect(engToKor('DpDJVKt')).toBe('에어팟');
   });
 
-  test('TkdTkdqk -> 쌍쌍바', () => {
+  test('combination(TkdTkdqk) -> 쌍쌍바', () => {
     expect(engToKor('TkdTkdqk')).toBe('쌍쌍바');
-  });
-
-  test('TKDTKDqK -> 쌍쌍바', () => {
+    expect(engToKor('TkdTkdqK')).toBe('쌍쌍바');
+    expect(engToKor('TkdTkDqK')).toBe('쌍쌍바');
+    expect(engToKor('TkdTKDqK')).toBe('쌍쌍바');
+    expect(engToKor('TkDTKDqK')).toBe('쌍쌍바');
     expect(engToKor('TKDTKDqK')).toBe('쌍쌍바');
   });
 
@@ -52,7 +54,7 @@ describe('Kor typing to english test', () => {
     expect(engToKor('CLZLS')).toBe('치킨');
   });
 
-  test('Ekdzhd -> 땅콩', () => {
+  test('combination(Ekdzhd) -> 땅콩', () => {
     expect(engToKor('Ekdzhd')).toBe('땅콩');
     expect(engToKor('EkdzhD')).toBe('땅콩');
     expect(engToKor('EkdzHD')).toBe('땅콩');
@@ -65,7 +67,32 @@ describe('Kor typing to english test', () => {
     expect(engToKor('rsefaqtdwczxvgRSEFAQTDWCZXVG')).toBe('ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎㄲㄴㄸㄹㅁㅃㅆㅇㅉㅊㅋㅌㅍㅎ');
   });
 
+  test('hkhohlnjnpnlmlkoiOjpuPhynbm l -> ㅘㅙㅚㅝㅞㅟㅢㅏㅐㅑㅒㅓㅔㅕㅖㅗㅛㅜㅠㅡ ㅣ', () => {
+    expect(engToKor('hkhohlnjnpnlmlkoiOjpuPhynbm l')).toBe('ㅘㅙㅚㅝㅞㅟㅢㅏㅐㅑㅒㅓㅔㅕㅖㅗㅛㅜㅠㅡ ㅣ');
+  });
+
   test('1234567890-=!@#$%^&*()_+ -> 1234567890-=!@#$%^&*()_+', () => {
     expect(engToKor('1234567890-=!@#$%^&*()_+')).toBe('1234567890-=!@#$%^&*()_+');
+  });
+
+  test('llaa -> ㅣㅣㅁㅁ', () => {
+    expect(engToKor('llaa')).toBe('ㅣㅣㅁㅁ');
+  });
+
+  test('lalaa -> ㅣ밈ㅁ', () => {
+    expect(engToKor('lalaa')).toBe('ㅣ밈ㅁ');
+  });
+
+  test('combination(dlinslsaf) -> 이ㅑ닌ㅁㄹ', () => {
+    expect(engToKor('dlinslsaf')).toBe('이ㅑㅜ닌ㅁㄹ');
+    expect(engToKor('dlinslsaF')).toBe('이ㅑㅜ닌ㅁㄹ');
+    expect(engToKor('dlinslsAF')).toBe('이ㅑㅜ닌ㅁㄹ');
+    expect(engToKor('dlinslSAF')).toBe('이ㅑㅜ닌ㅁㄹ');
+    expect(engToKor('dlinsLSAF')).toBe('이ㅑㅜ닌ㅁㄹ');
+    expect(engToKor('dlinSLSAF')).toBe('이ㅑㅜ닌ㅁㄹ');
+    expect(engToKor('dliNSLSAF')).toBe('이ㅑㅜ닌ㅁㄹ');
+    expect(engToKor('dlINSLSAF')).toBe('이ㅑㅜ닌ㅁㄹ');
+    expect(engToKor('dLINSLSAF')).toBe('이ㅑㅜ닌ㅁㄹ');
+    expect(engToKor('DLINSLSAF')).toBe('이ㅑㅜ닌ㅁㄹ');
   });
 });

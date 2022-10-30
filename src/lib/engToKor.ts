@@ -4,45 +4,58 @@ export default function engToKor(text: string) {
   const lastConsonantsSubstitutedText = substituteLastConsonants(firstConsonantsSubstitutedText);
   const normalizedText = lastConsonantsSubstitutedText.normalize('NFKC');
 
-  return substituteTheLeftConsonants(normalizedText);
+  const theLeftVowelsSubstitutedText = substituteTheLeftVowels(normalizedText);
+  return substituteTheLeftConsonants(theLeftVowelsSubstitutedText);
 }
 
 function substituteVowels(text: string) {
   return text
-  .replaceAll(/hk|ho|hl|nj|np|nl|ml/gi, (s) => vowelDict[s.toLowerCase()])
-  .replaceAll(/[OP]/g, (s) => vowelDict[s])
-  .replaceAll(/[a-zA-Z]/g, (s) => (vowelDict[s.toLowerCase()] ? vowelDict[s.toLowerCase()] : s));
+    .replaceAll(
+      /([rsefaqtdwczxvg])(hk|ho|hl|nj|np|nl|ml)/gi,
+      (s, g1, g2) => g1.toLowerCase() + vowelDict[g2.toLowerCase()],
+    )
+    .replaceAll(/([rsefaqtdwczxvg])([OP])/gi, (s, g1, g2) => {
+      if (g2 === 'O' || g2 === 'P') {
+        return g1.toLowerCase() + vowelDict[g2];
+      } else {
+        return s;
+      }
+    })
+    .replaceAll(/([rsefaqtdwczxvg])([koijpuhynbml])/gi, (s, g1, g2) => g1 + vowelDict[g2.toLowerCase()]);
 }
 
 function substituteFirstConsonants(text: string) {
   return text
-  .replaceAll(/([REQTW])([ㅏ-ㅣ])/g, (s, g1, g2) => {
-    return firstConsonantDict[g1] + g2;
-  })
-  .replaceAll(/([a-zA-Z])([ㅏ-ㅣ])/gi, (s, g1, g2) => {
-    return firstConsonantDict[g1.toLowerCase()] + g2;
-  });
+    .replaceAll(/([REQTW])([ㅏ-ㅣ])/g, (s, g1, g2) => firstConsonantDict[g1] + g2)
+    .replaceAll(/([a-zA-Z])([ㅏ-ㅣ])/gi, (s, g1, g2) => firstConsonantDict[g1.toLowerCase()] + g2);
 }
 
 function substituteLastConsonants(text: string) {
   return text
-  .replaceAll(/([ㅏ-ㅣ])([RT])([^ㅏ-ㅣ]|$)/g, (s, g1, g2, g3) => {
-    return g1 + lastConsonantDict[g2] + g3;
-  })
-  .replaceAll(/([ㅏ-ㅣ])(rt|sw|sg|fr|fa|fq|ft|fx|fv|fg|qt)([^ㅏ-ㅣ]|$)/gi, (s, g1, g2, g3) => {
-    return g1 + lastConsonantDict[g2.toLowerCase()] + g3;
-  })
-  .replaceAll(/([ㅏ-ㅣ])([a-zA-Z])([^ㅏ-ㅣ]|$)/gi, (s, g1, g2, g3) => {
-    return g1 + lastConsonantDict[g2.toLowerCase()] + g3;
-  });
+    .replaceAll(/([ㅏ-ㅣ])([RT])([^ㅏ-ㅣ]|$)/g, (s, g1, g2, g3) => g1 + lastConsonantDict[g2] + g3)
+    .replaceAll(
+      /([ㅏ-ㅣ])(rt|sw|sg|fr|fa|fq|ft|fx|fv|fg|qt)([^ㅏ-ㅣ]|$)/gi,
+      (s, g1, g2, g3) => g1 + lastConsonantDict[g2.toLowerCase()] + g3,
+    )
+    .replaceAll(
+      /([ㅏ-ㅣ])([rsefaqtdwczxvg])([^ㅏ-ㅣ]|$)/gi,
+      (s, g1, g2, g3) => g1 + lastConsonantDict[g2.toLowerCase()] + g3,
+    );
 }
 
 function substituteTheLeftConsonants(text: string) {
   return text
-  .replaceAll(/[REQTW]/g, (s) => compatibleConsonantDict[s])
-  .replaceAll(/([a-zA-Z])/gi, (s, g1) => {
-    return firstConsonantDict[g1.toLowerCase()];
-  });
+    .replaceAll(/[REQTW]/g, (s) => compatibleConsonantDict[s])
+    .replaceAll(/([a-zA-Z])/g, (s) =>
+      compatibleConsonantDict[s.toLowerCase()] ? compatibleConsonantDict[s.toLowerCase()] : s,
+    );
+}
+
+function substituteTheLeftVowels(text: string) {
+  return text
+    .replaceAll(/hk|ho|hl|nj|np|nl|ml/gi, (s) => vowelDict[s.toLowerCase()])
+    .replaceAll(/[OP]/g, (s) => vowelDict[s])
+    .replaceAll(/[a-zA-Z]/g, (s) => (vowelDict[s.toLowerCase()] ? vowelDict[s.toLowerCase()] : s));
 }
 
 interface Dictionary {
