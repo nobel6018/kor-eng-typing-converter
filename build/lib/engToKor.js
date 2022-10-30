@@ -5,42 +5,46 @@ function engToKor(text) {
     var firstConsonantsSubstitutedText = substituteFirstConsonants(vowelSubstitutedText);
     var lastConsonantsSubstitutedText = substituteLastConsonants(firstConsonantsSubstitutedText);
     var normalizedText = lastConsonantsSubstitutedText.normalize('NFKC');
-    return substituteTheLeftConsonants(normalizedText);
+    var theLeftVowelsSubstitutedText = substituteTheLeftVowels(normalizedText);
+    return substituteTheLeftConsonants(theLeftVowelsSubstitutedText);
 }
 exports.default = engToKor;
 function substituteVowels(text) {
     return text
-        .replaceAll(/hk|ho|hl|nj|np|nl|ml/gi, function (s) { return vowelDict[s.toLowerCase()]; })
-        .replaceAll(/[OP]/g, function (s) { return vowelDict[s]; })
-        .replaceAll(/[a-zA-Z]/g, function (s) { return (vowelDict[s.toLowerCase()] ? vowelDict[s.toLowerCase()] : s); });
+        .replaceAll(/([rsefaqtdwczxvg])(hk|ho|hl|nj|np|nl|ml)/gi, function (s, g1, g2) { return g1.toLowerCase() + vowelDict[g2.toLowerCase()]; })
+        .replaceAll(/([rsefaqtdwczxvg])([OP])/gi, function (s, g1, g2) {
+        if (g2 === 'O' || g2 === 'P') {
+            return g1.toLowerCase() + vowelDict[g2];
+        }
+        else {
+            return s;
+        }
+    })
+        .replaceAll(/([rsefaqtdwczxvg])([koijpuhynbml])/gi, function (s, g1, g2) { return g1 + vowelDict[g2.toLowerCase()]; });
 }
 function substituteFirstConsonants(text) {
     return text
-        .replaceAll(/([REQTW])([ㅏ-ㅣ])/g, function (s, g1, g2) {
-        return firstConsonantDict[g1] + g2;
-    })
-        .replaceAll(/([a-zA-Z])([ㅏ-ㅣ])/gi, function (s, g1, g2) {
-        return firstConsonantDict[g1.toLowerCase()] + g2;
-    });
+        .replaceAll(/([REQTW])([ㅏ-ㅣ])/g, function (s, g1, g2) { return firstConsonantDict[g1] + g2; })
+        .replaceAll(/([a-zA-Z])([ㅏ-ㅣ])/gi, function (s, g1, g2) { return firstConsonantDict[g1.toLowerCase()] + g2; });
 }
 function substituteLastConsonants(text) {
     return text
-        .replaceAll(/([ㅏ-ㅣ])([RT])([^ㅏ-ㅣ]|$)/g, function (s, g1, g2, g3) {
-        return g1 + lastConsonantDict[g2] + g3;
-    })
-        .replaceAll(/([ㅏ-ㅣ])(rt|sw|sg|fr|fa|fq|ft|fx|fv|fg|qt)([^ㅏ-ㅣ]|$)/gi, function (s, g1, g2, g3) {
-        return g1 + lastConsonantDict[g2.toLowerCase()] + g3;
-    })
-        .replaceAll(/([ㅏ-ㅣ])([a-zA-Z])([^ㅏ-ㅣ]|$)/gi, function (s, g1, g2, g3) {
-        return g1 + lastConsonantDict[g2.toLowerCase()] + g3;
-    });
+        .replaceAll(/([ㅏ-ㅣ])([RT])([^ㅏ-ㅣ]|$)/g, function (s, g1, g2, g3) { return g1 + lastConsonantDict[g2] + g3; })
+        .replaceAll(/([ㅏ-ㅣ])(rt|sw|sg|fr|fa|fq|ft|fx|fv|fg|qt)([^ㅏ-ㅣ]|$)/gi, function (s, g1, g2, g3) { return g1 + lastConsonantDict[g2.toLowerCase()] + g3; })
+        .replaceAll(/([ㅏ-ㅣ])([rsefaqtdwczxvg])([^ㅏ-ㅣ]|$)/gi, function (s, g1, g2, g3) { return g1 + lastConsonantDict[g2.toLowerCase()] + g3; });
 }
 function substituteTheLeftConsonants(text) {
     return text
         .replaceAll(/[REQTW]/g, function (s) { return compatibleConsonantDict[s]; })
-        .replaceAll(/([a-zA-Z])/gi, function (s, g1) {
-        return firstConsonantDict[g1.toLowerCase()];
+        .replaceAll(/([a-zA-Z])/g, function (s) {
+        return compatibleConsonantDict[s.toLowerCase()] ? compatibleConsonantDict[s.toLowerCase()] : s;
     });
+}
+function substituteTheLeftVowels(text) {
+    return text
+        .replaceAll(/hk|ho|hl|nj|np|nl|ml/gi, function (s) { return vowelDict[s.toLowerCase()]; })
+        .replaceAll(/[OP]/g, function (s) { return vowelDict[s]; })
+        .replaceAll(/[a-zA-Z]/g, function (s) { return (vowelDict[s.toLowerCase()] ? vowelDict[s.toLowerCase()] : s); });
 }
 // prettier-ignore
 var vowelDict = {
