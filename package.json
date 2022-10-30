@@ -1,6 +1,6 @@
 {
   "name": "kor-eng-typing-converter",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "author": "Lee YoungHoon <nobel6018@gmail.com>",
@@ -20,7 +20,7 @@
     "email": "nobel6018@gmail.com"
   },
   "scripts": {
-    "build": "rimraf build && tsc",
+    "build": "rimraf build && yarn test && tsc",
     "test": "jest"
   },
   "devDependencies": {
