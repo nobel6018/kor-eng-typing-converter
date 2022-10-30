@@ -1,11 +1,11 @@
-import { getKoreaAlphabetType, isKorean, KoreaAlphabetType, KoreanUnicode } from './common';
+import { getKoreaAlphabetType, isKorean, KoreaAlphabetType, KoreanUnicode } from '../common';
 import {
   compatibleConsonantKeyMap,
   compatibleVowelKeyMap,
   firstConsonantKeyMap,
   lastConsonantKeyMap,
   middleVowelKeyMap,
-} from './keyMaps';
+} from '../keyMaps';
 
 export default function korToEng(text: string) {
   let result = '';
