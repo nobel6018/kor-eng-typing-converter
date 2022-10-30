@@ -1,4 +1,4 @@
-import { engToKor } from '../index';
+import { engToKor } from '../src';
 
 describe('Kor typing to english test', () => {
   test('dpdjvkt -> 에어팟', () => {

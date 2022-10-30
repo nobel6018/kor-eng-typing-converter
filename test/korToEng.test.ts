@@ -1,4 +1,4 @@
-import { korToEng } from '../index';
+import { korToEng } from '../src';
 
 describe('Kor typing to english test', () => {
   test('ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ -> rsefaqtdwczxvg', () => {
@@ -22,7 +22,9 @@ describe('Kor typing to english test', () => {
   });
 
   test('ㅡ묘 ㅑ ㅁ나 ㅛㅐㅕ ㅁ 볃ㄴ샤ㅐㅜ, 솓 략ㄴㅅ ㅐㅜㄷ? -> may i ask you a question, the first one?', () => {
-    expect(korToEng('ㅡ묘 ㅑ ㅁ나 ㅛㅐㅕ ㅁ 볃ㄴ샤ㅐㅜ, 솓 략ㄴㅅ ㅐㅜㄷ?')).toBe('may i ask you a question, the first one?');
+    expect(korToEng('ㅡ묘 ㅑ ㅁ나 ㅛㅐㅕ ㅁ 볃ㄴ샤ㅐㅜ, 솓 략ㄴㅅ ㅐㅜㄷ?')).toBe(
+      'may i ask you a question, the first one?',
+    );
   });
 
   test('ㅑ 채ㅕㅣㅇ ㅕㄴㄷ ㅡㅛ ㅑㅡㅁ햐ㅜㅁ샤ㅐㅜ ㅡㅐㄱㄷ. -> i could use my imagination more.', () => {
