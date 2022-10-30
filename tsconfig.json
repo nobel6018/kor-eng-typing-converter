@@ -5,6 +5,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./build",
+    "strict": true,
     "declaration": true,
     "noEmit": false,
     "emitDecoratorMetadata": true,

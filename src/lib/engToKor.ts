@@ -45,22 +45,26 @@ function substituteTheLeftConsonants(text: string) {
     });
 }
 
+interface Dictionary {
+  [key: string]: string;
+}
+
 // prettier-ignore
-const vowelDict = {
+const vowelDict: Dictionary = {
   hk: 'ㅘ', ho: 'ㅙ', hl: 'ㅚ', nj: 'ㅝ', np: 'ㅞ', nl: 'ㅟ', ml: 'ㅢ', k: 'ㅏ', o: 'ㅐ', i: 'ㅑ', O: 'ㅒ', j: 'ㅓ', p: 'ㅔ', u: 'ㅕ', P: 'ㅖ', h: 'ㅗ', y: 'ㅛ', n: 'ㅜ', b: 'ㅠ', m: 'ㅡ', l: 'ㅣ'
 };
 
 // prettier-ignore
-const firstConsonantDict = {
+const firstConsonantDict: Dictionary = {
   r: 'ㄱ', R: 'ㄲ', s: 'ㄴ', e: 'ㄷ', E: 'ㄸ', f: 'ㄹ', a: 'ㅁ', q: 'ㅂ', Q: 'ㅃ', t: 'ㅅ', T: 'ㅆ', d: 'ㅇ', w: 'ㅈ', W: 'ㅉ', c: 'ㅊ', z: 'ㅋ', x: 'ㅌ', v: 'ㅍ', g: 'ㅎ'
 };
 
 // prettier-ignore
-const lastConsonantDict = {
+const lastConsonantDict: Dictionary = {
   R: 'ᆩ', T: 'ᆻ', rt: 'ᆪ', sw: 'ᆬ', sg: 'ᆭ', fr: 'ᆰ', fa: 'ᆱ', fq: 'ᆲ', ft: 'ᆳ', fx: 'ᆴ', fv: 'ᆵ', fg: 'ᆶ', qt: 'ᆹ', r: 'ᆨ', s: 'ᆫ', e: 'ᆮ', f: 'ᆯ', a: 'ᆷ', q: 'ᆸ', t: 'ᆺ', d: 'ᆼ', w: 'ᆽ', c: 'ᆾ', z: 'ᆿ', x: 'ᇀ', v: 'ᇁ', g: 'ᇂ'
 };
 
 // prettier-ignore
-const compatibleConsonantDict = {
+const compatibleConsonantDict: Dictionary = {
   r: 'ㄱ',  R: 'ㄲ',  rt: 'ㄳ',  s: 'ㄴ',  sw: 'ㄵ',  sg: 'ㄶ',  e: 'ㄷ',  E: 'ㄸ',  f: 'ㄹ',  fr: 'ㄺ',  fa: 'ㄻ',  fq: 'ㄼ',  ft: 'ㄽ',  fx: 'ㄾ',  fv: 'ㄿ',  fg: 'ㅀ',  a: 'ㅁ',  q: 'ㅂ',  Q: 'ㅃ',  qt: 'ㅄ',  t: 'ㅅ',  T: 'ㅆ',  d: 'ㅇ',  w: 'ㅈ',  W: 'ㅉ',  c: 'ㅊ',  z: 'ㅋ',  x: 'ㅌ',  v: 'ㅍ',  g: 'ㅎ'
 };
