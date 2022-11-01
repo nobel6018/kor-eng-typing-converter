@@ -95,4 +95,8 @@ describe('Kor typing to english test', () => {
     expect(engToKor('dLINSLSAF')).toBe('이ㅑㅜ닌ㅁㄹ');
     expect(engToKor('DLINSLSAF')).toBe('이ㅑㅜ닌ㅁㄹ');
   });
+
+  test('ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ -> ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ', () => {
+    expect(engToKor('ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ')).toBe('ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ');
+  });
 });

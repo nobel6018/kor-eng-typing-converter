@@ -34,4 +34,8 @@ describe('Kor typing to english test', () => {
   test('ㅑ 채ㅕㅣㅇ ㅕㄴㄷ ㅡㅛ ㅑㅡㅁ햐ㅜㅁ샤ㅐㅜ ㅡㅐㄱㄷ. -> i could use my imagination more.', () => {
     expect(korToEng('ㅑ 채ㅕㅣㅇ ㅕㄴㄷ ㅡㅛ ㅑㅡㅁ햐ㅜㅁ샤ㅐㅜ ㅡㅐㄱㄷ.')).toBe('i could use my imagination more.');
   });
+
+  test('abcdefghijklmnopqrstuvwxyz -> abcdefghijklmnopqrstuvwxyz', () => {
+    expect(korToEng('abcdefghijklmnopqrstuvwxyz')).toBe('abcdefghijklmnopqrstuvwxyz');
+  });
 });
