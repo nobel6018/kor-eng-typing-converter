@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function engToKor(text) {
+    return text.replaceAll(/\w+/gi, function (s) { return convertEngToKor(s); });
+}
+exports.default = engToKor;
+function convertEngToKor(text) {
     var vowelSubstitutedText = substituteVowels(text);
     var firstConsonantsSubstitutedText = substituteFirstConsonants(vowelSubstitutedText);
     var lastConsonantsSubstitutedText = substituteLastConsonants(firstConsonantsSubstitutedText);
@@ -8,7 +12,6 @@ function engToKor(text) {
     var theLeftVowelsSubstitutedText = substituteTheLeftVowels(normalizedText);
     return substituteTheLeftConsonants(theLeftVowelsSubstitutedText);
 }
-exports.default = engToKor;
 function substituteVowels(text) {
     return text
         .replaceAll(/([rsefaqtdwczxvg])(hk|ho|hl|nj|np|nl|ml)/gi, function (s, g1, g2) { return g1.toLowerCase() + vowelDict[g2.toLowerCase()]; })
