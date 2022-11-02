@@ -1,10 +1,3 @@
-export function isKorean(unicode: number) {
-  return (
-    (unicode >= KoreanUnicode.FIRST_CONSONANT_START && unicode <= KoreanUnicode.LAST_CONSONANT_END) ||
-    (unicode >= KoreanUnicode.COMPATIBLE_CONSONANT_START && unicode <= KoreanUnicode.COMPATIBLE_VOWEL_END)
-  );
-}
-
 export function getKoreaAlphabetType(unicode: number): KoreaAlphabetType {
   if (unicode >= KoreanUnicode.FIRST_CONSONANT_START && unicode <= KoreanUnicode.FIRST_CONSONANT_END) {
     return KoreaAlphabetType.FIRST_CONSONANT_LETTER;

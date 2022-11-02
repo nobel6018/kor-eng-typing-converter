@@ -1,4 +1,4 @@
-import { getKoreaAlphabetType, isKorean, KoreaAlphabetType, KoreanUnicode } from '../common';
+import { getKoreaAlphabetType, KoreaAlphabetType, KoreanUnicode } from '../common';
 import {
   compatibleConsonantKeyMap,
   compatibleVowelKeyMap,
@@ -8,23 +8,12 @@ import {
 } from '../keyMaps';
 
 export default function korToEng(text: string) {
-  let result = '';
-
-  const normalized = text.normalize('NFD');
-  for (const char of normalized) {
-    const unicode = char.charCodeAt(0);
-
-    if (isKorean(unicode)) {
-      result += convertKoreaAlphabetToEnglishAlphabet(unicode);
-    } else {
-      result += char;
-    }
-  }
-
-  return result;
+  return text.normalize('NFD').replaceAll(/[ᄀ-ᇂㄱ-ㅣ]/g, (s) => convertKorCharToEng(s));
 }
 
-function convertKoreaAlphabetToEnglishAlphabet(unicode: number) {
+function convertKorCharToEng(char: string) {
+  const unicode = char.charCodeAt(0);
+
   const koreaAlphabetType = getKoreaAlphabetType(unicode);
   switch (koreaAlphabetType) {
     case KoreaAlphabetType.FIRST_CONSONANT_LETTER:

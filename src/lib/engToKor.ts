@@ -1,8 +1,8 @@
 export default function engToKor(text: string) {
-  return text.replaceAll(/\w+/gi, (s) => convertEngToKor(s));
+  return text.replaceAll(/\w+/gi, (s) => convertEngStringToKor(s));
 }
 
-function convertEngToKor(text: string) {
+function convertEngStringToKor(text: string) {
   const vowelSubstitutedText = substituteVowels(text);
   const firstConsonantsSubstitutedText = substituteFirstConsonants(vowelSubstitutedText);
   const lastConsonantsSubstitutedText = substituteLastConsonants(firstConsonantsSubstitutedText);
