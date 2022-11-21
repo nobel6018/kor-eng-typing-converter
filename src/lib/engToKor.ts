@@ -5,18 +5,27 @@ export default function engToKor(text: string) {
 }
 
 class EngToKorConverter {
-  convertEngStringToKor(text: string) {
-    const vowelSubstitutedText = this.substituteVowels(text);
-    const firstConsonantsSubstitutedText = this.substituteFirstConsonants(vowelSubstitutedText);
-    const lastConsonantsSubstitutedText = this.substituteLastConsonants(firstConsonantsSubstitutedText);
-    const normalizedText = lastConsonantsSubstitutedText.normalize('NFKC');
+  text: string;
 
-    const theLeftVowelsSubstitutedText = this.substituteTheLeftVowels(normalizedText);
-    return this.substituteTheLeftConsonants(theLeftVowelsSubstitutedText);
+  constructor() {
+    this.text = '';
   }
 
-  private substituteVowels(text: string) {
-    return text
+  convertEngStringToKor(text: string) {
+    this.text = text;
+
+    this.substituteVowels();
+    this.substituteFirstConsonants();
+    this.substituteLastConsonants();
+    this.text = this.text.normalize('NFKC');
+    this.substituteTheLeftVowels();
+    this.substituteTheLeftConsonants();
+
+    return this.text;
+  }
+
+  private substituteVowels() {
+    this.text = this.text
       .replaceAll(
         /([rsefaqtdwczxvg])(hk|ho|hl|nj|np|nl|ml)/gi,
         (s, g1, g2) => g1.toLowerCase() + vowelDict[g2.toLowerCase()],
@@ -31,14 +40,14 @@ class EngToKorConverter {
       .replaceAll(/([rsefaqtdwczxvg])([koijpuhynbml])/gi, (s, g1, g2) => g1 + vowelDict[g2.toLowerCase()]);
   }
 
-  private substituteFirstConsonants(text: string) {
-    return text
+  private substituteFirstConsonants() {
+    this.text = this.text
       .replaceAll(/([REQTW])([ㅏ-ㅣ])/g, (s, g1, g2) => firstConsonantDict[g1] + g2)
       .replaceAll(/([a-zA-Z])([ㅏ-ㅣ])/gi, (s, g1, g2) => firstConsonantDict[g1.toLowerCase()] + g2);
   }
 
-  private substituteLastConsonants(text: string) {
-    return text
+  private substituteLastConsonants() {
+    this.text = this.text
       .replaceAll(/([ㅏ-ㅣ])([RT])([^ㅏ-ㅣ]|$)/g, (s, g1, g2, g3) => g1 + lastConsonantDict[g2] + g3)
       .replaceAll(
         /([ㅏ-ㅣ])(rt|sw|sg|fr|fa|fq|ft|fx|fv|fg|qt)([^ㅏ-ㅣ]|$)/gi,
@@ -50,16 +59,16 @@ class EngToKorConverter {
       );
   }
 
-  private substituteTheLeftConsonants(text: string) {
-    return text
+  private substituteTheLeftConsonants() {
+    this.text = this.text
       .replaceAll(/[REQTW]/g, (s) => compatibleConsonantDict[s])
       .replaceAll(/([a-zA-Z])/g, (s) =>
         compatibleConsonantDict[s.toLowerCase()] ? compatibleConsonantDict[s.toLowerCase()] : s,
       );
   }
 
-  private substituteTheLeftVowels(text: string) {
-    return text
+  private substituteTheLeftVowels() {
+    this.text = this.text
       .replaceAll(/hk|ho|hl|nj|np|nl|ml/gi, (s) => vowelDict[s.toLowerCase()])
       .replaceAll(/[OP]/g, (s) => vowelDict[s])
       .replaceAll(/[a-zA-Z]/g, (s) => (vowelDict[s.toLowerCase()] ? vowelDict[s.toLowerCase()] : s));
